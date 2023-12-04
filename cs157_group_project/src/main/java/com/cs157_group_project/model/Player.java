@@ -21,9 +21,6 @@ public class Player {
     @Setter(AccessLevel.NONE)
     private Long id;
 
-    @Column(unique = true)
-    private String email;
-
     private String name;
 
     private LocalDate birthday;
