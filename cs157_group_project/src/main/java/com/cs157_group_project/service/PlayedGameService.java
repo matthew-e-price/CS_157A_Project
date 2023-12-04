@@ -26,12 +26,16 @@ public class PlayedGameService {
         return playedGameRepository.findAll();
     }
 
-    public List<PlayedGame> getPlayedGameByPlayerId(long id) {
+    public List<PlayedGame> getPlayedGamesByPlayerId(long id) {
         return playedGameRepository.findByPlayerId(id);
     }
 
-    public List<PlayedGame> getPlayedGameByGameId(long id) {
+    public List<PlayedGame> getPlayedGamesByGameId(long id) {
         return playedGameRepository.findByGameId(id);
+    }
+
+    public List<PlayedGame> getPlayedGameByTopScore() {
+        return playedGameRepository.findAllByOrderByScoreDesc();
     }
 
     public Optional<PlayedGame> getPlayedGameById(long id) {

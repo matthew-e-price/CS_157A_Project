@@ -1,8 +1,6 @@
 package com.cs157_group_project.controller;
 
-import com.cs157_group_project.model.Game;
 import com.cs157_group_project.model.PlayedGame;
-import com.cs157_group_project.model.Player;
 import com.cs157_group_project.repository.PlayedGameRepository;
 import com.cs157_group_project.service.GameService;
 import com.cs157_group_project.service.PlayedGameService;
@@ -46,7 +44,7 @@ public class PlayedGameController {
     @GetMapping("/played_games/players/{id}")
     public ResponseEntity<List<PlayedGame>> getPlayedGamesByPlayerId(@PathVariable("id") long id) {
         try {
-            List<PlayedGame> playedGames = new ArrayList<>(playedGameService.getPlayedGameByPlayerId(id));
+            List<PlayedGame> playedGames = new ArrayList<>(playedGameService.getPlayedGamesByPlayerId(id));
             return ResponseEntity.ok(playedGames);
         }
         catch (Exception e) {
@@ -57,10 +55,22 @@ public class PlayedGameController {
     @GetMapping("/played_games/games/{id}")
     public ResponseEntity<List<PlayedGame>> getPlayedGamesByGameId(@PathVariable("id") long id) {
         try {
-            List<PlayedGame> playedGames = new ArrayList<>(playedGameService.getPlayedGameByGameId(id));
+            List<PlayedGame> playedGames = new ArrayList<>(playedGameService.getPlayedGamesByGameId(id));
             return ResponseEntity.ok(playedGames);
         }
         catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
+
+    @GetMapping("/leaderboards")
+    public ResponseEntity<List<PlayedGame>> getPlayedGamesByTopScore() {
+        try {
+            List<PlayedGame> playedGames = new ArrayList<>(playedGameService.getPlayedGameByTopScore());
+            return ResponseEntity.ok(playedGames);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
             return ResponseEntity.internalServerError().build();
         }
     }

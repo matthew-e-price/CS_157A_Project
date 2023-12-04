@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PlayedGameRepository extends JpaRepository<PlayedGame, Long> {
-    List<PlayedGame> findTop10ByScore(int score);
+    List<PlayedGame> findAllByOrderByScoreDesc();
     List<PlayedGame> findByPlayerId(long id);
     List<PlayedGame> findByGameId(long id);
     Optional<PlayedGame> findByPlayerIdAndGameId(long playerId, long gameId);
