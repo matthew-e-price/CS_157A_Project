@@ -72,6 +72,12 @@ public class PlayedGameController {
         return ResponseEntity.of(playedGame);
     }
 
+    @GetMapping("/played_games/{id}")
+    public ResponseEntity<PlayedGame> getPlayedGameById(@PathVariable("id") long id) {
+        Optional<PlayedGame> playedGame = playedGameService.getPlayedGameById(id);
+        return ResponseEntity.of(playedGame);
+    }
+
     @PostMapping("/played_games")
     public ResponseEntity<PlayedGame> CreatePlayedGame(@RequestBody PlayedGame playedGame) {
         try {

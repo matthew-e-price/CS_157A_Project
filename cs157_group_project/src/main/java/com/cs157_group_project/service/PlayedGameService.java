@@ -5,7 +5,6 @@ import com.cs157_group_project.model.PlayedGame;
 import com.cs157_group_project.model.Player;
 import com.cs157_group_project.repository.PlayedGameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,6 +32,10 @@ public class PlayedGameService {
 
     public List<PlayedGame> getPlayedGameByGameId(long id) {
         return playedGameRepository.findByGameId(id);
+    }
+
+    public Optional<PlayedGame> getPlayedGameById(long id) {
+        return playedGameRepository.findById(id);
     }
 
     public Optional<PlayedGame> getPlayedGameByPlayerIdAndGameId(long playerId, long gameId) {

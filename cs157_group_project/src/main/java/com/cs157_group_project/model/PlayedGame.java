@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = {"player_id", "game_id"}))
 @NoArgsConstructor
@@ -33,6 +35,10 @@ public class PlayedGame {
     @JoinColumn
     private Game game;
 
+    @JsonIgnoreProperties("playedGame")
+    @OneToMany(mappedBy = "playedGame", cascade = CascadeType.ALL)
+    private Set<Frame> frames;
+
     @ToString.Include(name = "player_id")
     private String getPlayerId() {
         return "" + player.getId();
@@ -41,5 +47,9 @@ public class PlayedGame {
     @ToString.Include(name = "game_id")
     private String getGameId() {
         return "" + game.getId();
+    }
+
+    public void addFrame(Frame frame) {
+        frames.add(frame);
     }
 }
