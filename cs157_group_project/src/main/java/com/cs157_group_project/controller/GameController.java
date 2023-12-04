@@ -2,6 +2,7 @@ package com.cs157_group_project.controller;
 
 import com.cs157_group_project.model.Game;
 import com.cs157_group_project.repository.GameRepository;
+import com.cs157_group_project.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,73 +19,64 @@ public class GameController {
     @Autowired
     private GameRepository gameRepository;
 
+    @Autowired
+    private GameService gameService;
+
     @GetMapping("/games")
     public ResponseEntity<List<Game>> getAllGames() {
         try {
-            List<Game> games = new ArrayList<>(gameRepository.findAll());
-
-            if (games.isEmpty()) {
-                return new ResponseEntity<>(games, HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(games, HttpStatus.OK);
+            List<Game> games = new ArrayList<>(gameService.getAllGames());
+            return ResponseEntity.ok(games);
         }
         catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.internalServerError().build();
         }
     }
 
     @GetMapping("/games/{id}")
     public ResponseEntity<Game> getGameById(@PathVariable("id") long id) {
-        Optional<Game> gameData = gameRepository.findById(id);
-
-        if (gameData.isPresent()) {
-            return new ResponseEntity<>(gameData.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Optional<Game> gameData = gameService.getGameById(id);
+        return ResponseEntity.of(gameData);
     }
 
     @PostMapping("/games")
     public ResponseEntity<Game> createGame(@RequestBody Game game) {
         try {
-            Game newGame = gameRepository.save(game);
+            Game newGame = gameService.createGame(game);
             return new ResponseEntity<>(newGame, HttpStatus.CREATED);
         }
         catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.internalServerError().build();
         }
     }
 
     @PutMapping("/games/{id}")
     public ResponseEntity<Game> updateGame(@PathVariable("id") long id, @RequestBody Game game) {
-        Optional<Game> gameData = gameRepository.findById(id);
+        Game newGame = gameService.updateGame(id, game);
 
-        if (gameData.isPresent()) {
-            Game newGame = gameData.get();
-            newGame.setLane(game.getLane());
-            newGame.setDate(game.getDate());
-            return new ResponseEntity<>(gameRepository.save(newGame), HttpStatus.OK);
+        if (newGame != null) {
+            return ResponseEntity.ok(newGame);
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/games/{id}")
     public ResponseEntity<HttpStatus> deleteGame(@PathVariable("id") long id) {
         try {
-            gameRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            gameService.deleteGame(id);
+            return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.internalServerError().build();
         }
     }
 
     @DeleteMapping("/games")
     public ResponseEntity<HttpStatus> deleteAllGames() {
         try {
-            gameRepository.deleteAll();
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            gameService.deleteAllGames();
+            return ResponseEntity.noContent().build();
         } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.internalServerError().build();
         }
     }
 }
