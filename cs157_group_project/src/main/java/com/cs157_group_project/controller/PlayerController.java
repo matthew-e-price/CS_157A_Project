@@ -2,6 +2,7 @@ package com.cs157_group_project.controller;
 
 import com.cs157_group_project.model.Player;
 import com.cs157_group_project.repository.PlayerRepository;
+import com.cs157_group_project.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ public class PlayerController {
 
     @Autowired
     private PlayerRepository playerRepository;
+    @Autowired
+    private PlayerService playerService;
 
     @GetMapping("/players")
     public ResponseEntity<List<Player>> getAllPlayers(@RequestParam(required = false) String name) {
@@ -30,25 +33,17 @@ public class PlayerController {
                 players.addAll(playerRepository.findAll());
             }
 
-            if (players.isEmpty()) {
-                return new ResponseEntity<>(players, HttpStatus.NO_CONTENT);
-            }
-
-            return new ResponseEntity<>(players, HttpStatus.OK);
+            return ResponseEntity.ok(players);
         }
         catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.internalServerError().build();
         }
     }
 
     @GetMapping("/players/{id}")
     public ResponseEntity<Player> getPlayerById(@PathVariable("id") long id) {
-        Optional<Player> playerData = playerRepository.findById(id);
-
-        if (playerData.isPresent()) {
-            return new ResponseEntity<>(playerData.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Optional<Player> playerData = playerService.getPlayerById(id);
+        return ResponseEntity.of(playerData);
     }
 
     @PostMapping("/players")
@@ -58,30 +53,28 @@ public class PlayerController {
             return new ResponseEntity<>(newPlayer, HttpStatus.CREATED);
         }
         catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.internalServerError().build();
         }
     }
 
     @PutMapping("/players/{id}")
     public ResponseEntity<Player> updatePlayer(@PathVariable("id") long id, @RequestBody Player player) {
-        Optional<Player> playerData = playerRepository.findById(id);
+        Player newPlayer = playerService.updatePlayer(id, player);
 
-        if (playerData.isPresent()) {
-            Player newPlayer = playerData.get();
-            newPlayer.setName(player.getName());
-            newPlayer.setBirthday(player.getBirthday());
-            return new ResponseEntity<>(playerRepository.save(newPlayer), HttpStatus.OK);
+        if (newPlayer != null) {
+            return ResponseEntity.ok(playerRepository.save(newPlayer));
         }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/players/{id}")
     public ResponseEntity<HttpStatus> deletePlayer(@PathVariable("id") long id) {
         try {
             playerRepository.deleteById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.noContent().build();
+        }
+        catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
         }
     }
 
@@ -89,9 +82,10 @@ public class PlayerController {
     public ResponseEntity<HttpStatus> deleteAllPlayers() {
         try {
             playerRepository.deleteAll();
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.noContent().build();
+        }
+        catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
         }
     }
 }
