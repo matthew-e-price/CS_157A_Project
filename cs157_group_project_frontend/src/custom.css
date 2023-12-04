@@ -1,0 +1,16 @@
+:root {
+  --main-bg-color: #d6d6d6;
+  --border-color: #888888;
+  --navbar-color: #b88964;
+  --navbar-secondary-color: #ffc69a;
+}
+
+html {
+  background-color: whitesmoke;
+  --bs-body-bg: var(--main-bg-color) !important;
+}
+
+.searchButton {
+  --bs-btn-bg: var(--navbar-secondary-color) !important;
+  --bs-btn-border-color: none;
+}
