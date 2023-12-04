@@ -1,11 +1,12 @@
 package com.cs157_group_project.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @NoArgsConstructor
@@ -24,4 +25,17 @@ public class Game {
 
     private LocalDate date;
 
+    @JsonIgnoreProperties("game")
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL)
+    private Set<PlayedGame> players = new HashSet<>();
+
+
+
+    public void addPlayedGame(PlayedGame playedGame) {
+        players.add(playedGame);
+    }
+
+    public void removePlayedGame(PlayedGame playedGame) {
+        players.remove(playedGame);
+    }
 }
