@@ -23,7 +23,7 @@ public class Player {
 
     private String name;
 
-    private String birthday;
+    private LocalDate birthday;
 
     @JsonIgnoreProperties("player")
     @OneToMany(mappedBy = "player", cascade = CascadeType.ALL)
