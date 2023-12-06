@@ -17,6 +17,10 @@ public class PlayerService {
         return playerRepository.findById(id);
     }
 
+    public Optional<Player> getPlayerByEmail(String email) {
+        return playerRepository.findByEmail(email);
+    }
+
     public Player updatePlayer(long id, Player player) {
         Optional<Player> playerData = playerRepository.findById(id);
 

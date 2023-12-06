@@ -2,6 +2,7 @@ package com.cs157_group_project.controller;
 
 import com.cs157_group_project.model.Player;
 import com.cs157_group_project.repository.PlayerRepository;
+import com.cs157_group_project.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,9 @@ public class PlayerController {
 
     @Autowired
     private PlayerRepository playerRepository;
+
+    @Autowired
+    private PlayerService playerService;
 
     @GetMapping("/allPlayers")
     public ResponseEntity<List<Player>> getAllPlayers(@RequestParam(required = false) String name) {
@@ -41,15 +45,16 @@ public class PlayerController {
         }
     }
 
-    @GetMapping("/getPlayer/{id}")
+    @GetMapping("/getPlayerById/{id}")
     public ResponseEntity<Player> getPlayerById(@PathVariable("id") long id) {
-        System.out.println("Bruh");
-        Optional<Player> playerData = playerRepository.findById(id);
+        Optional<Player> playerData = playerService.getPlayerById(id);
+        return ResponseEntity.of(playerData);
+    }
 
-        if (playerData.isPresent()) {
-            return new ResponseEntity<>(playerData.get(), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    @GetMapping("/getPlayerByEmail/{email}")
+    public ResponseEntity<Player> getPlayerByEmail(@PathVariable("email") String email) {
+        Optional<Player> playerData = playerService.getPlayerByEmail(email);
+        return ResponseEntity.of(playerData);
     }
 
     @PostMapping("/addPlayer")

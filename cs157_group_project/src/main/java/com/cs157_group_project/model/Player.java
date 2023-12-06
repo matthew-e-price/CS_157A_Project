@@ -17,9 +17,12 @@ import java.util.Set;
 public class Player {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private Long id;
+
+    @Column(unique = true)
+    private String email;
 
     private String name;
 

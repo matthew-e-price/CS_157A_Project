@@ -17,7 +17,7 @@ import java.util.Set;
 public class PlayedGame {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private Long id;
 
