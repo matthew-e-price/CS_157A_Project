@@ -31,7 +31,7 @@ const UserInfo = () => {
 
   return(
     <div
-      className="main-content d-flex flex-column  align-items-center justify-content-center"
+      className="main-content d-flex flex-column  align-items-center justify-content-center pb-5"
       style={{ backgroundColor: "var(--main-bg-color)", minHeight: "100vh"}}
     >
       <Row className="mb-2 w-auto">
@@ -50,11 +50,11 @@ const UserInfo = () => {
           Return Home
         </Button>
       </Row>
-      <Row className="d-flex align-items-center justify-content-center mb-3" style={{width: "90vw", backgroundColor: "whitesmoke"}}>
+      <Row className="d-flex align-items-center justify-content-center mb-3" style={{width: "95vw", backgroundColor: "whitesmoke"}}>
         <Col className={"border border-black"}>
           <p className={"fw-bolder text-center m-1"}>Name</p>
         </Col>
-        <Col className={"border border-black"}>
+        <Col className={"border border-black"} xs={1}>
           <p className={"fw-bolder text-center m-1"}>Date</p>
         </Col>
         <Col className={"border border-black"}>
@@ -93,11 +93,11 @@ const UserInfo = () => {
       </Row>
       {playedGames?.map((games) => {
         return (
-          <Row className="d-flex align-items-center justify-content-center" style={{width: "90vw", backgroundColor: "whitesmoke"}}>
+          <Row className="d-flex align-items-center justify-content-center" style={{width: "95vw", backgroundColor: "whitesmoke"}}>
             <Col className={"border border-black"}>
               <p className={"fw-bolder text-center m-1"}>{games.player.name}</p>
             </Col>
-            <Col className={"border border-black"}>
+            <Col className={"border border-black"} xs={1}>
               <p className={"fw-bolder text-center m-1"}>{games.game.date}</p>
             </Col>
             {games.frames?.map((frames) => {

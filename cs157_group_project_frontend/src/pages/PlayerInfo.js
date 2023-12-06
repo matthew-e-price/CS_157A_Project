@@ -50,13 +50,13 @@ const PlayerInfo = () => {
 
   return (
     <div
-      className="main-content d-flex flex-column align-items-center justify-content-center"
+      className="main-content d-flex flex-column align-items-center justify-content-center pb-5"
       style={{ backgroundColor: "var(--main-bg-color)", minHeight: "100vh" }}
     >
-      <Row className="mb-5" style={{width: "100vw"}}>
+      <Row className="mb-5" style={{width: "90vw"}}>
         <p className={"fw-bolder text-center"} style={{fontSize: "60px"}}>Player Info</p>
       </Row>
-      <Row className="d-flex align-items-center justify-content-center" style={{width: "100vw", marginBottom: "3rem"}}>
+      <Row className="d-flex align-items-center justify-content-center" style={{width: "90vw", marginBottom: "3rem"}}>
         <Col xs={{span: 4}} xl={{span: 4}} xxl={{span: 2}}>
           <Form className={"bg-white px-4 py-3 rounded-4"} onSubmit={handleSubmit}>
             <Form.Group controlid={"name"} className={"mb-3"}>
@@ -100,7 +100,7 @@ const PlayerInfo = () => {
           </Form>
         </Col>
       </Row>
-      <Row className="d-flex align-items-center justify-content-center mb-3" style={{width: "90vw", backgroundColor: "whitesmoke"}}>
+      <Row className="d-flex align-items-center justify-content-center mb-3" style={{width: "95vw", backgroundColor: "whitesmoke"}}>
         <Col className={"border border-black"}>
           <p className={"fw-bolder text-center m-1"}>Date</p>
         </Col>
@@ -140,7 +140,7 @@ const PlayerInfo = () => {
       </Row>
         {player.playedGames?.map((games) => {
           return (
-            <Row className="d-flex align-items-center justify-content-center" style={{width: "90vw", backgroundColor: "whitesmoke"}}>
+            <Row className="d-flex align-items-center justify-content-center" style={{width: "95vw", backgroundColor: "whitesmoke"}}>
               <Col className={"border border-black"}>
                 <p className={"fw-bolder text-center m-1"}>{games.game.date}</p>
               </Col>
