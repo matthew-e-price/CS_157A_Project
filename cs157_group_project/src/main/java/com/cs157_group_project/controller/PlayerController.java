@@ -18,7 +18,7 @@ public class PlayerController {
     @Autowired
     private PlayerRepository playerRepository;
 
-    @GetMapping("/players")
+    @GetMapping("/allPlayers")
     public ResponseEntity<List<Player>> getAllPlayers(@RequestParam(required = false) String name) {
         try {
             List<Player> players = new ArrayList<>();
@@ -41,8 +41,9 @@ public class PlayerController {
         }
     }
 
-    @GetMapping("/players/{id}")
+    @GetMapping("/getPlayer/{id}")
     public ResponseEntity<Player> getPlayerById(@PathVariable("id") long id) {
+        System.out.println("Bruh");
         Optional<Player> playerData = playerRepository.findById(id);
 
         if (playerData.isPresent()) {
@@ -51,7 +52,7 @@ public class PlayerController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PostMapping("/players")
+    @PostMapping("/addPlayer")
     public ResponseEntity<Player> createPlayer(@RequestBody Player player) {
         try {
             Player newPlayer = playerRepository.save(player);
