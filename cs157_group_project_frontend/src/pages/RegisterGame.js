@@ -108,7 +108,7 @@ const RegisterGame = () => {
         throw3: throws.f10t3,
         playedGame: response3.data
       });
-
+      navigate("/");
     } catch (error) {
       if (error.response && error.response.status === 401) {
         alert("Invalid userID")

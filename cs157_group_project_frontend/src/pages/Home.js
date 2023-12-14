@@ -89,7 +89,7 @@ const Home = () => {
                   borderColor: "var(--border-color)",
                 }}
               >
-                LeaderBoard
+                Leaderboard
               </Button>
             </Form.Group>
           </Form>
