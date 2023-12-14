@@ -3,6 +3,7 @@ package com.cs157_group_project.model;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.core.annotation.Order;
 
 import java.util.Set;
 
@@ -17,7 +18,7 @@ import java.util.Set;
 public class PlayedGame {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Setter(AccessLevel.NONE)
     private Long id;
 
@@ -36,6 +37,7 @@ public class PlayedGame {
     private Game game;
 
     @JsonIgnoreProperties("playedGame")
+    @OrderBy("frameNo")
     @OneToMany(mappedBy = "playedGame", cascade = CascadeType.ALL)
     private Set<Frame> frames;
 

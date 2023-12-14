@@ -3,7 +3,9 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home"
 import Leaderboard from "./pages/Leaderboard"
 import Register from "./pages/Register"
-import UserInfo from "./pages/UserInfo"
+import PlayerInfo from "./pages/PlayerInfo"
+import PlayerSearch from "./pages/PlayerSearch"
+import RegisterGame from "./pages/RegisterGame";
 
 function App() {
   return (
@@ -12,7 +14,9 @@ function App() {
         <Route path={"/"} element={<Home />} />
         <Route path={"/leaderboard"} element={<Leaderboard />} />
         <Route path={"/register"} element={<Register />} />
-        <Route path={"/userInfo/:userID"} element={<UserInfo />} />
+        <Route path={"/playerInfo/:email"} element={<PlayerInfo />} />
+        <Route path={"/playerSearch"} element={<PlayerSearch />} />
+        <Route path={"/registerGame"} element={<RegisterGame />} />
       </Routes>
     </BrowserRouter>
   );
