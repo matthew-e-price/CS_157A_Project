@@ -146,9 +146,14 @@ const PlayerInfo = () => {
               </Col>
               {games.frames?.map((frames) => {
                 return (
-                  <Col className={"border border-black"}>
-                    <p className={"fw-bolder text-center m-1"}>{frames.throw1} | {frames.throw2}</p>
-                  </Col>
+                  frames.frameNo === 10 ? (
+                    <Col className={"border border-black"}>
+                      <p className={"fw-bolder text-center m-1"}>{frames.throw1} | {frames.throw2} | {frames.throw3}</p>
+                    </Col>
+                  ):(
+                    <Col className={"border border-black"}>
+                      <p className={"fw-bolder text-center m-1"}>{frames.throw1} | {frames.throw2}</p>
+                    </Col>)
                 )
               })}
               <Col className={"border border-black"}>

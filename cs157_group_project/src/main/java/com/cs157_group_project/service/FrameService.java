@@ -23,11 +23,11 @@ public class FrameService {
     private FrameScoreService frameScoreService;
 
     public List<Frame> getAllFrames(long playedGameId) {
-        return frameRepository.findByPlayedGameId(playedGameId);
+        return frameRepository.findByPlayedGameIdOrderByFrameNo(playedGameId);
     }
 
     public List<Frame> getAllFrames(long playerId, long gameId) {
-        return frameRepository.findByPlayedGamePlayerIdAndPlayedGameGameId(playerId, gameId);
+        return frameRepository.findByPlayedGamePlayerIdAndPlayedGameGameIdOrderByFrameNo(playerId, gameId);
     }
 
     public Optional<Frame> getFrameByFrameNo(long playedGameId, int frameNo) {

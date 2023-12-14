@@ -50,11 +50,11 @@ const UserInfo = () => {
           Return Home
         </Button>
       </Row>
-      <Row className="d-flex align-items-center justify-content-center mb-3" style={{width: "95vw", backgroundColor: "whitesmoke"}}>
+      <Row className="d-flex align-items-center justify-content-center mb-3" style={{width: "98vw", backgroundColor: "whitesmoke"}}>
         <Col className={"border border-black"}>
           <p className={"fw-bolder text-center m-1"}>Name</p>
         </Col>
-        <Col className={"border border-black"} xs={1}>
+        <Col className={"border border-black"}>
           <p className={"fw-bolder text-center m-1"}>Date</p>
         </Col>
         <Col className={"border border-black"}>
@@ -93,18 +93,23 @@ const UserInfo = () => {
       </Row>
       {playedGames?.map((games) => {
         return (
-          <Row className="d-flex align-items-center justify-content-center" style={{width: "95vw", backgroundColor: "whitesmoke"}}>
+          <Row className="d-flex align-items-center justify-content-center" style={{width: "98vw", backgroundColor: "whitesmoke"}}>
             <Col className={"border border-black"}>
               <p className={"fw-bolder text-center m-1"}>{games.player.name}</p>
             </Col>
-            <Col className={"border border-black"} xs={1}>
+            <Col className={"border border-black"}>
               <p className={"fw-bolder text-center m-1"}>{games.game.date}</p>
             </Col>
             {games.frames?.map((frames) => {
               return (
-                <Col className={"border border-black"}>
-                  <p className={"fw-bolder text-center m-1"}>{frames.throw1} | {frames.throw2}</p>
-                </Col>
+                frames.frameNo === 10 ? (
+                  <Col className={"border border-black"}>
+                    <p className={"fw-bolder text-center m-1"}>{frames.throw1} | {frames.throw2} | {frames.throw3}</p>
+                  </Col>
+                ):(
+                  <Col className={"border border-black"}>
+                    <p className={"fw-bolder text-center m-1"}>{frames.throw1} | {frames.throw2}</p>
+                  </Col>)
               )
             })}
             <Col className={"border border-black"}>
