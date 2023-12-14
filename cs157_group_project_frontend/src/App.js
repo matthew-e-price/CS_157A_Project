@@ -5,6 +5,7 @@ import Leaderboard from "./pages/Leaderboard"
 import Register from "./pages/Register"
 import PlayerInfo from "./pages/PlayerInfo"
 import PlayerSearch from "./pages/PlayerSearch"
+import RegisterGame from "./pages/RegisterGame";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path={"/register"} element={<Register />} />
         <Route path={"/playerInfo/:email"} element={<PlayerInfo />} />
         <Route path={"/playerSearch"} element={<PlayerSearch />} />
+        <Route path={"/registerGame"} element={<RegisterGame />} />
       </Routes>
     </BrowserRouter>
   );

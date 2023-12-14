@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import {useNavigate, useParams} from "react-router-dom";
 import axios from "axios";
-import {Button, Col, Container, Form, Row} from "react-bootstrap";
+import {Button, Col, Form, Row} from "react-bootstrap";
 axios.defaults.baseURL = 'http://localhost:8080';
 
 const PlayerInfo = () => {
@@ -28,7 +28,7 @@ const PlayerInfo = () => {
     setPlayerEmail(email);
     setPlayerName(player.name);
     setPlayerBirthday(player.birthday);
-  }, [player])
+  }, [player, email])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -61,15 +61,15 @@ const PlayerInfo = () => {
           <Form className={"bg-white px-4 py-3 rounded-4"} onSubmit={handleSubmit}>
             <Form.Group controlid={"name"} className={"mb-3"}>
               <Form.Label className={"fw-bold"}>Name:</Form.Label>
-              <Form.Control disabled type="text" value={playerName} onChange={(e) => setPlayerName(e.target.value)} />
+              <Form.Control disabled type="text" value={playerName || ""} onChange={(e) => setPlayerName(e.target.value)} />
             </Form.Group>
             <Form.Group controlid={"email"} className={"mb-3"}>
               <Form.Label className={"fw-bold"}>Email:</Form.Label>
-              <Form.Control disabled type="text" value={playerEmail} onChange={(e) => setPlayerEmail(e.target.value)} />
+              <Form.Control disabled type="text" value={playerEmail || ""} onChange={(e) => setPlayerEmail(e.target.value)} />
             </Form.Group>
             <Form.Group controlid={"birthday"} className={"mb-3"}>
               <Form.Label className={"fw-bold"}>Birthday:</Form.Label>
-              <Form.Control disabled type="date" value={playerBirthday} onChange={(e) => setPlayerBirthday(e.target.value)} />
+              <Form.Control disabled type="date" value={playerBirthday || ""} onChange={(e) => setPlayerBirthday(e.target.value)} />
             </Form.Group>
             <Form.Group controlid={"submitButton"} className={"mb-3"}>
               <Button
@@ -100,7 +100,7 @@ const PlayerInfo = () => {
           </Form>
         </Col>
       </Row>
-      <Row className="d-flex align-items-center justify-content-center mb-3" style={{width: "95vw", backgroundColor: "whitesmoke"}}>
+      <Row className="d-flex align-items-center justify-content-center mb-3pm star" style={{width: "95vw", backgroundColor: "whitesmoke"}}>
         <Col className={"border border-black"}>
           <p className={"fw-bolder text-center m-1"}>Date</p>
         </Col>

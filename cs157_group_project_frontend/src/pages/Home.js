@@ -1,6 +1,6 @@
 import {Button, Col, Form, Row} from "react-bootstrap";
 import {useNavigate} from "react-router-dom";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import axios from "axios";
 axios.defaults.baseURL = 'http://localhost:8080';
 
@@ -47,6 +47,10 @@ const Home = () => {
 
   const navigateLeaderboard = () => {
     navigate("/leaderboard");
+  }
+
+  const navigateRegisterGame = () => {
+    navigate("/registerGame");
   }
 
   return (
@@ -119,6 +123,19 @@ const Home = () => {
                 }}
               >
                 Register Player
+              </Button>
+            </Form.Group>
+            <Form.Group controlid={"registerGame"}>
+              <Button
+                onClick={navigateRegisterGame}
+                variant="light"
+                className="mt-3 mb-3 fw-bold"
+                style={{
+                  border: "solid",
+                  borderColor: "var(--border-color)",
+                }}
+              >
+                Register Game
               </Button>
             </Form.Group>
           </Form>

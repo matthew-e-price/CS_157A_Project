@@ -54,8 +54,11 @@ public class FrameService {
         score.setThrow1(frame.getThrow1());
         score.setThrow2(frame.getThrow2());
         score.setThrow3(frame.getThrow3());
-
-        // TODO: calculate total frame score here
+        if (frame.getThrow3() != null){
+            score.setTotal(frame.getThrow1() + frame.getThrow2() + frame.getThrow3());
+        }else{
+            score.setTotal(frame.getThrow1() + frame.getThrow2());
+        }
 
         frameScoreService.createFrameScore(score);
 
