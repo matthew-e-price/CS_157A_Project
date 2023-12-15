@@ -13,3 +13,5 @@ IMPORTANT: We currently only have this code working as is in IntelliJ IDEA
 8) The website should open in your browser, and it will continue running until terminated
 
 NOTE: Unfortunately there wasn't enough manpower to implement checks on all the inputs, so please be reasonable with what you use
+
+[Report](https://docs.google.com/document/d/11UWvCICLJwwupzlYEopDjZVE6Pd-hlYNafmoWt1xmoI)
